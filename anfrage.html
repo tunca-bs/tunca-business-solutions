@@ -40,12 +40,9 @@
 <p class="intro">Beantworten Sie kurz die folgenden Fragen. So können wir Ihre Anfrage schneller einordnen und gezielt auf Sie zukommen.</p>
 <div class="progress"><div class="bar" id="bar"></div></div>
 
-<form id="anfrageForm" action="https://formsubmit.co/info@tunca-bs.com" method="POST">
-<input type="hidden" name="_subject" value="Neue Website-Anfrage | Tunca Business Solutions">
-<input type="hidden" name="_template" value="table">
-<input type="hidden" name="_next" value="https://tunca-bs.com/anfrage.html?gesendet=1">
-<input type="hidden" name="_url" value="https://tunca-bs.com/anfrage.html">
-<input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
+<form id="anfrageForm" target="makeSubmitFrame" action="https://hook.eu1.make.com/zzburvz3p6pdom8uo794wp33oaadsw79" method="POST">
+<input type="hidden" name="source" value="tunca-bs.com">
+<input type="hidden" name="form_type" value="Website Anfrage">
 <section class="step active" data-step="1">
 <div class="field"><label for="service">Worum geht es?</label>
 <select id="service" name="Leistung" required><option value="">Bitte auswählen</option><option>Photovoltaik / Energie</option><option>Speicher / Elektromobilität</option><option>IT / Digitalisierung</option><option>Telekommunikation</option><option>Sonstiges</option></select></div>
@@ -67,6 +64,7 @@
 <div class="actions2"><button type="button" class="a-btn a-secondary" onclick="prevStep()">← Zurück</button><button class="a-btn a-primary" type="submit">Anfrage absenden →</button></div>
 </section>
 </form>
+<iframe name="makeSubmitFrame" title="Formularübertragung" style="display:none"></iframe>
 </div>
 <div class="success" id="success"><div class="eyebrow">ANFRAGE ERFASST</div><h2>Vielen Dank.</h2><p>Ihre Angaben wurden erfolgreich erfasst. Wir melden uns schnellstmöglich bei Ihnen.</p><p><a class="btn primary" href="index.html">Zur Startseite</a></p></div>
 </div>
@@ -78,7 +76,7 @@ let current=1;
 function show(){document.querySelectorAll(".step").forEach(s=>s.classList.toggle("active",Number(s.dataset.step)===current));document.getElementById("bar").style.width=(current/3*100)+"%";window.scrollTo({top:0,behavior:"smooth"})}
 function nextStep(){const step=document.querySelector('.step[data-step="'+current+'"]');if(!step.querySelector(":invalid")){current=Math.min(3,current+1);show()}else step.querySelector(":invalid").reportValidity()}
 function prevStep(){current=Math.max(1,current-1);show()}
-const params=new URLSearchParams(window.location.search);if(params.get("gesendet")==="1"){document.getElementById("formArea").style.display="none";document.getElementById("success").style.display="block";}
+document.getElementById("anfrageForm").addEventListener("submit",e=>{if(!e.target.checkValidity()){e.preventDefault();e.target.reportValidity();return}document.getElementById("formArea").style.display="none";document.getElementById("success").style.display="block";});
 </script>
 </body>
 </html>
