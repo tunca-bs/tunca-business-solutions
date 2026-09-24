@@ -40,24 +40,29 @@
 <p class="intro">Beantworten Sie kurz die folgenden Fragen. So können wir Ihre Anfrage schneller einordnen und gezielt auf Sie zukommen.</p>
 <div class="progress"><div class="bar" id="bar"></div></div>
 
-<form id="anfrageForm">
+<form id="anfrageForm" action="https://formsubmit.co/info@tunca-bs.com" method="POST">
+<input type="hidden" name="_subject" value="Neue Website-Anfrage | Tunca Business Solutions">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="https://tunca-bs.com/anfrage.html?gesendet=1">
+<input type="hidden" name="_url" value="https://tunca-bs.com/anfrage.html">
+<input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
 <section class="step active" data-step="1">
 <div class="field"><label for="service">Worum geht es?</label>
-<select id="service" required><option value="">Bitte auswählen</option><option>Photovoltaik / Energie</option><option>Speicher / Elektromobilität</option><option>IT / Digitalisierung</option><option>Telekommunikation</option><option>Sonstiges</option></select></div>
-<div class="field"><label for="description">Was möchten Sie umsetzen?</label><textarea id="description" required placeholder="Kurz beschreiben, was Sie benötigen..."></textarea></div>
+<select id="service" name="Leistung" required><option value="">Bitte auswählen</option><option>Photovoltaik / Energie</option><option>Speicher / Elektromobilität</option><option>IT / Digitalisierung</option><option>Telekommunikation</option><option>Sonstiges</option></select></div>
+<div class="field"><label for="description">Was möchten Sie umsetzen?</label><textarea id="description" name="Beschreibung" required placeholder="Kurz beschreiben, was Sie benötigen..."></textarea></div>
 <div class="actions2"><span></span><button type="button" class="a-btn a-primary" onclick="nextStep()">Weiter →</button></div>
 </section>
 
 <section class="step" data-step="2">
-<div class="row"><div class="field"><label for="zip">PLZ</label><input id="zip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required placeholder="34454"></div>
-<div class="field"><label for="urgency">Zeitraum</label><select id="urgency" required><option value="">Bitte auswählen</option><option>So schnell wie möglich</option><option>In den nächsten Wochen</option><option>In den nächsten Monaten</option><option>Unverbindliche Planung</option></select></div></div>
-<div class="field"><label for="property">Standort / Objekt</label><input id="property" placeholder="z. B. Gewerbehalle, Büro, Wohngebäude"></div>
+<div class="row"><div class="field"><label for="zip">PLZ</label><input id="zip" name="PLZ" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required placeholder="34454"></div>
+<div class="field"><label for="urgency">Zeitraum</label><select id="urgency" name="Zeitraum" required><option value="">Bitte auswählen</option><option>So schnell wie möglich</option><option>In den nächsten Wochen</option><option>In den nächsten Monaten</option><option>Unverbindliche Planung</option></select></div></div>
+<div class="field"><label for="property">Standort / Objekt</label><input id="property" name="Standort / Objekt" placeholder="z. B. Gewerbehalle, Büro, Wohngebäude"></div>
 <div class="actions2"><button type="button" class="a-btn a-secondary" onclick="prevStep()">← Zurück</button><button type="button" class="a-btn a-primary" onclick="nextStep()">Weiter →</button></div>
 </section>
 
 <section class="step" data-step="3">
-<div class="row"><div class="field"><label for="name">Name</label><input id="name" required></div><div class="field"><label for="company">Unternehmen</label><input id="company"></div></div>
-<div class="row"><div class="field"><label for="email">E-Mail</label><input id="email" type="email" required></div><div class="field"><label for="phone">Telefon</label><input id="phone" type="tel" required></div></div>
+<div class="row"><div class="field"><label for="name">Name</label><input id="name" name="Name" required></div><div class="field"><label for="company">Unternehmen</label><input id="company" name="Unternehmen"></div></div>
+<div class="row"><div class="field"><label for="email">E-Mail</label><input id="email" name="email" type="email" required</div><div class="field"><label for="phone">Telefon</label><input id="phone" name="Telefon" type="tel" required></div></div>
 <div class="field"><label><input id="consent" type="checkbox" required> Ich stimme zu, dass Tunca Business Solutions meine Angaben zur Bearbeitung der Anfrage verwendet.</label></div>
 <div class="actions2"><button type="button" class="a-btn a-secondary" onclick="prevStep()">← Zurück</button><button class="a-btn a-primary" type="submit">Anfrage absenden →</button></div>
 </section>
@@ -73,7 +78,7 @@ let current=1;
 function show(){document.querySelectorAll(".step").forEach(s=>s.classList.toggle("active",Number(s.dataset.step)===current));document.getElementById("bar").style.width=(current/3*100)+"%";window.scrollTo({top:0,behavior:"smooth"})}
 function nextStep(){const step=document.querySelector('.step[data-step="'+current+'"]');if(!step.querySelector(":invalid")){current=Math.min(3,current+1);show()}else step.querySelector(":invalid").reportValidity()}
 function prevStep(){current=Math.max(1,current-1);show()}
-document.getElementById("anfrageForm").addEventListener("submit",e=>{e.preventDefault();if(!e.target.checkValidity()){e.target.reportValidity();return}document.getElementById("formArea").style.display="none";document.getElementById("success").style.display="block";});
+const params=new URLSearchParams(window.location.search);if(params.get("gesendet")==="1"){document.getElementById("formArea").style.display="none";document.getElementById("success").style.display="block";}
 </script>
 </body>
 </html>
