@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anfrage-Assistent | Tunca Business Solutions</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.anfrage-wrap{max-width:820px;margin:0 auto;padding:110px 24px 80px}
+.anfrage-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:22px;padding:34px;box-shadow:0 20px 60px rgba(0,0,0,.08)}
+.anfrage-card h1{margin:8px 0 12px;font-size:clamp(32px,5vw,54px);line-height:1.02}
+.anfrage-card .intro{color:#667085;margin-bottom:30px}
+.step{display:none}.step.active{display:block}
+.field{margin:18px 0}.field label{display:block;font-weight:700;margin-bottom:8px}
+.field input,.field select,.field textarea{width:100%;box-sizing:border-box;padding:14px;border:1px solid #d8dce3;border-radius:12px;font:inherit}
+.field textarea{min-height:120px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.actions2{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+.a-btn{border:0;border-radius:12px;padding:14px 20px;font-weight:800;cursor:pointer}
+.a-primary{background:#111;color:#fff}.a-secondary{background:#eef1f5;color:#111}
+.progress{height:6px;background:#edf0f4;border-radius:99px;margin:0 0 28px;overflow:hidden}.bar{height:100%;width:33%;background:#111;border-radius:99px;transition:.2s}
+.notice{padding:14px;border-radius:12px;background:#f5f7fa;color:#555;font-size:14px;margin-top:18px}
+.success{display:none;text-align:center;padding:30px 0}.success h2{font-size:34px}
+@media(max-width:650px){.row{grid-template-columns:1fr}.anfrage-card{padding:22px}.anfrage-wrap{padding-top:90px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="wrap navin">
+<a class="logo" href="index.html"><img src="logo.png" alt="Tunca Business Solutions"></a>
+<div class="links"><a href="index.html">Startseite</a><a href="leistungen.html">Leistungen</a><a href="unternehmen.html">Für Unternehmen</a><a href="ueber-tbs.html">Über TBS</a><a href="ablauf.html">Ablauf</a><a href="kontakt.html">Kontakt</a></div>
+<a class="btn primary" href="kontakt.html">Kontakt</a>
+</div></nav>
+
+<main class="anfrage-wrap">
+<div class="anfrage-card">
+<div id="formArea">
+<div class="eyebrow">TUNCA BUSINESS SOLUTIONS · ANFRAGE</div>
+<h1>Erzählen Sie uns von Ihrem Vorhaben.</h1>
+<p class="intro">Beantworten Sie kurz die folgenden Fragen. So können wir Ihre Anfrage schneller einordnen und gezielt auf Sie zukommen.</p>
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<form id="anfrageForm">
+<section class="step active" data-step="1">
+<div class="field"><label for="service">Worum geht es?</label>
+<select id="service" required><option value="">Bitte auswählen</option><option>Photovoltaik / Energie</option><option>Speicher / Elektromobilität</option><option>IT / Digitalisierung</option><option>Telekommunikation</option><option>Sonstiges</option></select></div>
+<div class="field"><label for="description">Was möchten Sie umsetzen?</label><textarea id="description" required placeholder="Kurz beschreiben, was Sie benötigen..."></textarea></div>
+<div class="actions2"><span></span><button type="button" class="a-btn a-primary" onclick="nextStep()">Weiter →</button></div>
+</section>
+
+<section class="step" data-step="2">
+<div class="row"><div class="field"><label for="zip">PLZ</label><input id="zip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required placeholder="34454"></div>
+<div class="field"><label for="urgency">Zeitraum</label><select id="urgency" required><option value="">Bitte auswählen</option><option>So schnell wie möglich</option><option>In den nächsten Wochen</option><option>In den nächsten Monaten</option><option>Unverbindliche Planung</option></select></div></div>
+<div class="field"><label for="property">Standort / Objekt</label><input id="property" placeholder="z. B. Gewerbehalle, Büro, Wohngebäude"></div>
+<div class="actions2"><button type="button" class="a-btn a-secondary" onclick="prevStep()">← Zurück</button><button type="button" class="a-btn a-primary" onclick="nextStep()">Weiter →</button></div>
+</section>
+
+<section class="step" data-step="3">
+<div class="row"><div class="field"><label for="name">Name</label><input id="name" required></div><div class="field"><label for="company">Unternehmen</label><input id="company"></div></div>
+<div class="row"><div class="field"><label for="email">E-Mail</label><input id="email" type="email" required></div><div class="field"><label for="phone">Telefon</label><input id="phone" type="tel" required></div></div>
+<div class="field"><label><input id="consent" type="checkbox" required> Ich stimme zu, dass Tunca Business Solutions meine Angaben zur Bearbeitung der Anfrage verwendet.</label></div>
+<div class="notice">Hinweis: Dies ist aktuell die Demo-Version des Anfrage-Assistenten. Die automatische Übergabe an CRM/Make wird als nächster Schritt angeschlossen.</div>
+<div class="actions2"><button type="button" class="a-btn a-secondary" onclick="prevStep()">← Zurück</button><button class="a-btn a-primary" type="submit">Anfrage absenden →</button></div>
+</section>
+</form>
+</div>
+<div class="success" id="success"><div class="eyebrow">ANFRAGE ERFASST</div><h2>Vielen Dank.</h2><p>Ihre Angaben wurden in dieser Demo erfasst. Für den produktiven Betrieb schließen wir jetzt die automatische Weiterleitung an Make/CRM an.</p><p><a class="btn primary" href="index.html">Zur Startseite</a></p></div>
+</div>
+</main>
+<footer><div class="wrap foot"><span>© <span data-year></span> Tunca Business Solutions · Öztürk Tunca</span><span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="mailto:info@tunca-bs.com">info@tunca-bs.com</a></span></div></footer>
+<script>
+document.querySelectorAll("[data-year]").forEach(x=>x.textContent=new Date().getFullYear());
+let current=1;
+function show(){document.querySelectorAll(".step").forEach(s=>s.classList.toggle("active",Number(s.dataset.step)===current));document.getElementById("bar").style.width=(current/3*100)+"%";window.scrollTo({top:0,behavior:"smooth"})}
+function nextStep(){const step=document.querySelector('.step[data-step="'+current+'"]');if(!step.querySelector(":invalid")){current=Math.min(3,current+1);show()}else step.querySelector(":invalid").reportValidity()}
+function prevStep(){current=Math.max(1,current-1);show()}
+document.getElementById("anfrageForm").addEventListener("submit",e=>{e.preventDefault();if(!e.target.checkValidity()){e.target.reportValidity();return}document.getElementById("formArea").style.display="none";document.getElementById("success").style.display="block";});
+</script>
+</body>
+</html>
